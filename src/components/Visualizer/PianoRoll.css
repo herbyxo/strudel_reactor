@@ -1,0 +1,11 @@
+.piano-roll-container {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  .piano-roll-canvas {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-width: 100%;
+    height: auto;
+  }
