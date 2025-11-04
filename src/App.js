@@ -91,37 +91,54 @@ export default function App() {
           <span className="navbar-brand">Strudel Reactor</span>
 
           <span className="navbar-text">
-            React + Strudel Playground
+            
           </span>
         </div>
       </nav>
 
       <main>
         <div className="container-fluid">
-          <div className="row">
-            {/* Left column - 8/12 width */}
-            <div className="col-md-8">
-              <PreprocessorEditor 
-                value={rawText}
-                onChange={handlePreprocessorChange}
-              />
-            </div>
-            
-            {/* Right column - 4/12 width - TOP RIGHT */}
-            <div className="col-md-4">
-            <ControlPanel 
-              controls={controls}
-              onControlChange={handleControlChange}
-              onPlay={handlePlay}
-              onStop={handleStop}
-              onProcess={processAndUpdate}
-              onProcessAndPlay={processAndPlay}
+        <div className="row mt-3">
+
+        {/* Preprocessor */}
+        <div className="col-md-8 mb-3">
+        <div className="card bg-light shadow-sm h-100">
+          <div className="card-header">
+            <strong>Preprocessor</strong>
+          </div>
+          <div className="card-body">
+            <PreprocessorEditor 
+              value={rawText}
+              onChange={handlePreprocessorChange}
             />
+          </div>
+        </div>
+        </div>
+            
+            {/* ControlPanel */}
+            <div className="col-md-4 mb-3">
+            <div className="card bg-light shadow-sm h-100">
+              <div className="card-header">
+                <strong>Control Panel</strong>
+              </div>
+              <div className="card-body">
+                <ControlPanel 
+                  controls={controls}
+                  onControlChange={handleControlChange}
+                  onPlay={handlePlay}
+                  onStop={handleStop}
+                  onProcess={processAndUpdate}
+                  onProcessAndPlay={processAndPlay}
+                />
+              </div>
             </div>
+          </div>
+
           </div>
           
           <div className="row">
             {/* Left column - Strudel Editor */}
+            {/* Strudel Editor */}
             <div className="col-md-8">
               <StrudelEditor 
                 editorRef={editorRef}
