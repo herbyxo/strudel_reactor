@@ -98,3 +98,10 @@ stack(
 // all(x => x.log())
 
 // @version 1.2`;
+
+export const instruments = [
+  { id: 'drums', name: 'Main Drums' },
+  { id: 'drums2', name: 'Hi-Hats' },
+  { id: 'bassline', name: 'Bass Line' },
+  { id: 'main_arp', name: 'Main Arpeggio' }
+];

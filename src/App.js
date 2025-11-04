@@ -4,7 +4,7 @@ import PreprocessorEditor from './components/PreprocessorEditor/PreprocessorEdit
 import StrudelEditor from './components/StrudelEditor/StrudelEditor';
 import ControlPanel from './components/ControlPanel/ControlPanel';
 import PianoRoll from './components/Visualizer/PianoRoll';
-import { stranger_tune } from './tunes';
+import { stranger_tune, instruments } from './tunes';
 import { processText } from './utils/preprocessor';
 
 export default function App() {
@@ -17,6 +17,9 @@ export default function App() {
   // State for control values
   const [controls, setControls] = useState({
     p1: 'on',
+    p1_instrument: 'drums',
+    p2: 'on',
+    p2_instrument: 'drums2',
   });
   
   // Ref to hold the Strudel editor instance
@@ -95,14 +98,15 @@ export default function App() {
             
             {/* Right column - 4/12 width - TOP RIGHT */}
             <div className="col-md-4">
-              <ControlPanel 
-                controls={controls}
-                onControlChange={handleControlChange}
-                onPlay={handlePlay}
-                onStop={handleStop}
-                onProcess={processAndUpdate}
-                onProcessAndPlay={processAndPlay}
-              />
+            <ControlPanel 
+              controls={controls}
+              onControlChange={handleControlChange}
+              onPlay={handlePlay}
+              onStop={handleStop}
+              onProcess={processAndUpdate}
+              onProcessAndPlay={processAndPlay}
+              instruments={instruments}
+            />
             </div>
           </div>
           
