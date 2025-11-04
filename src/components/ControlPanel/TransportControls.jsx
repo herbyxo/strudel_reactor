@@ -1,4 +1,5 @@
 import React from 'react';
+import './css/TransportControls.css';
 
 export default function TransportControls({ onPlay, onStop, onProcess, onProcessAndPlay }) {
   return (
@@ -6,25 +7,25 @@ export default function TransportControls({ onPlay, onStop, onProcess, onProcess
       <div className="btn-group-vertical" role="group" style={{ width: '100%' }}>
         <button 
           onClick={onProcess} 
-          className="btn btn-outline-primary"
+          className="btn btn-transport btn-transport-blue"
         >
           Preprocess
         </button>
         <button 
           onClick={onProcessAndPlay} 
-          className="btn btn-outline-success"
+          className="btn btn-transport btn-transport-green"
         >
           Proc & Play
         </button>
         <button 
           onClick={onPlay} 
-          className="btn btn-outline-primary"
+          className="btn btn-transport btn-transport-green"
         >
           Play
         </button>
         <button 
           onClick={onStop} 
-          className="btn btn-outline-danger"
+          className="btn btn-transport btn-transport-red"
         >
           Stop
         </button>

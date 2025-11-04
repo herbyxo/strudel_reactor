@@ -1,0 +1,43 @@
+.btn-transport {
+    border: 1px solid #808080; /* Light grey outline */
+    background-color: transparent;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-transport:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+    border-color: #a0a0a0;
+  }
+  
+  .btn-transport:active {
+    transform: scale(0.98);
+  }
+  
+  /* Blue text for Preprocess */
+  .btn-transport-blue {
+    color: #4a9eff; /* RGB blue */
+  }
+  
+  .btn-transport-blue:hover {
+    color: #6db3ff;
+  }
+  
+  /* Green text for Play buttons */
+  .btn-transport-green {
+    color: #4ade80; /* RGB green */
+  }
+  
+  .btn-transport-green:hover {
+    color: #6ee89b;
+  }
+  
+  /* Red text for Stop */
+  .btn-transport-red {
+    color: #f87171; /* RGB red */
+  }
+  
+  .btn-transport-red:hover {
+    color: #fca5a5;
+  }

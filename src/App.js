@@ -86,70 +86,63 @@ export default function App() {
 
   return (
     <div className="bg-dark text-light min-vh-100">
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-darker border-bottom border-secondary">
         <div className="container-fluid">
           <span className="navbar-brand">Strudel Reactor</span>
-
-          <span className="navbar-text">
-            
-          </span>
         </div>
       </nav>
-
+  
       <main>
         <div className="container-fluid">
-        <div className="row mt-3">
-
-        {/* Preprocessor */}
-        <div className="col-md-8 mb-3">
-        <div className="card bg-light shadow-sm h-100">
-          <div className="card-header">
-            <strong>Preprocessor</strong>
-          </div>
-          <div className="card-body">
-            <PreprocessorEditor 
-              value={rawText}
-              onChange={handlePreprocessorChange}
-            />
-          </div>
-        </div>
-        </div>
-            
-            {/* ControlPanel */}
-            <div className="col-md-4 mb-3">
-            <div className="card bg-light shadow-sm h-100">
-              <div className="card-header">
-                <strong>Control Panel</strong>
-              </div>
-              <div className="card-body">
-                <ControlPanel 
-                  controls={controls}
-                  onControlChange={handleControlChange}
-                  onPlay={handlePlay}
-                  onStop={handleStop}
-                  onProcess={processAndUpdate}
-                  onProcessAndPlay={processAndPlay}
-                />
+          <div className="row mt-3">
+            {/* Preprocessor */}
+            <div className="col-md-8 mb-3">
+              <div className="card bg-darker-grey shadow-sm h-100">
+                <div className="card-header bg-dark-grey text-light">
+                  <strong>Preprocessor</strong>
+                </div>
+                <div className="card-body">
+                  <PreprocessorEditor 
+                    value={rawText}
+                    onChange={handlePreprocessorChange}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-
+            
+            {/* Control Panel */}
+            <div className="col-md-4 mb-3">
+              <div className="card bg-darker-grey shadow-sm h-100">
+                <div className="card-header bg-dark-grey text-light">
+                  <strong>Control Panel</strong>
+                </div>
+                <div className="card-body">
+                  <ControlPanel 
+                    controls={controls}
+                    onControlChange={handleControlChange}
+                    onPlay={handlePlay}
+                    onStop={handleStop}
+                    onProcess={processAndUpdate}
+                    onProcessAndPlay={processAndPlay}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
           
           <div className="row">
-            {/* Left column - Strudel Editor */}
             {/* Strudel Editor */}
-            <div className="col-md-8">
-              <StrudelEditor 
-                editorRef={editorRef}
-                processedCode={processedText}
-              />
-            </div>
-            
-            {/* Right column - Empty for now */}
-            <div className="col-md-4">
-              <div style={{ padding: '1rem' }}>
-                <p className="text-muted">Additional controls will appear here</p>
+            <div className="col-md-12 mb-3">
+              <div className="card bg-darker-grey shadow-sm">
+                <div className="card-header bg-dark-grey text-light">
+                  <strong>Strudel Editor</strong>
+                </div>
+                <div className="card-body">
+                  <StrudelEditor 
+                    editorRef={editorRef}
+                    processedCode={processedText}
+                  />
+                </div>
               </div>
             </div>
           </div>

@@ -1,0 +1,17 @@
+.control-panel {
+  padding: 1rem;
+  background-color: transparent; /* Changed from #f8f9fa */
+  border-radius: 8px;
+  min-height: 300px;
+}
+
+.control-panel h5 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #e0e0e0; /* Light text for dark bg */
+}
+
+.control-panel hr {
+  margin: 1rem 0;
+  border-color: #404040; /* Darker grey */
+}

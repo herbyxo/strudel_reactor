@@ -1,7 +1,7 @@
 import React from 'react';
 import TransportControls from './TransportControls';
 import InstrumentControls from './InstrumentControls';
-import './ControlPanel.css';
+import './css/ControlPanel.css';
 
 export default function ControlPanel({ 
   controls, 

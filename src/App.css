@@ -28,6 +28,47 @@
   color: #61dafb;
 }
 
+/* Two shades of grey for dark theme */
+.bg-dark-grey {
+  background-color: #2b2b2b !important;
+}
+
+.bg-darker-grey {
+  background-color: #1e1e1e !important;
+}
+
+.bg-darker {
+  background-color: #121212 !important;
+}
+
+/* Make cards look better in dark mode */
+.card {
+  border: 1px solid #404040;
+}
+
+.card-header {
+  border-bottom: 1px solid #404040;
+}
+
+/* Dark theme for textareas and inputs */
+.form-control {
+  background-color: #2b2b2b;
+  color: #e0e0e0;
+  border-color: #404040;
+}
+
+.form-control:focus {
+  background-color: #333333;
+  color: #e0e0e0;
+  border-color: #666666;
+}
+
+/* Piano roll in dark mode */
+.piano-roll-container {
+  background-color: #1e1e1e;
+  padding: 2rem;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

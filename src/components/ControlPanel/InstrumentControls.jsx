@@ -1,5 +1,5 @@
 import React from 'react';
-import './InstrumentControls.css';
+import './css/InstrumentControls.css';
 
 export default function InstrumentControls({ controls, onControlChange }) {
   return (
