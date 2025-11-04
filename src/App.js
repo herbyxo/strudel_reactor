@@ -7,11 +7,7 @@ import PianoRoll from './components/Visualizer/PianoRoll';
 import { stranger_tune} from './tunes';
 import { processText } from './utils/preprocessor';
 
-
 export default function App() {
-  
-  const [activePage, setActivePage] = useState('editor'); // 'editor' | 'visualizer'
-
   // State for raw preprocessor text
   const [rawText, setRawText] = useState(stranger_tune);
   
@@ -90,79 +86,42 @@ export default function App() {
 
   return (
     <div className="bg-dark text-light min-vh-100">
-
-      {/* NavBar */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary">
-  <div className="container-fluid">
-    <span className="navbar-brand">Strudel Reactor</span>
+        <div className="container-fluid">
+          <span className="navbar-brand">Strudel Reactor</span>
 
-    <div className="collapse navbar-collapse">
-      <ul className="navbar-nav ms-auto">
-        <li className="nav-item">
-          <button
-            className={`nav-link btn btn-link p-0 me-3 ${activePage === 'editor' ? 'active' : ''}`}
-            onClick={() => setActivePage('editor')}
-          >
-            Editor
-          </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className={`nav-link btn btn-link p-0 ${activePage === 'visualizer' ? 'active' : ''}`}
-            onClick={() => setActivePage('visualizer')}
-          >
-            Visualizer
-          </button>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
+          <span className="navbar-text">
+            React + Strudel Playground
+          </span>
+        </div>
+      </nav>
 
       <main>
         <div className="container-fluid">
-          <div className="row mt-3">
-
-            {/* Preprocessor */}
-            <div className="col-md-8 mb-3">
-            <div className="card bg-light shadow-sm h-100">
-              <div className="card-header">
-                <strong>Preprocessor</strong>
-              </div>
-              <div className="card-body">
-                <PreprocessorEditor 
-                  value={rawText}
-                  onChange={handlePreprocessorChange}
-                />
-              </div>
+          <div className="row">
+            {/* Left column - 8/12 width */}
+            <div className="col-md-8">
+              <PreprocessorEditor 
+                value={rawText}
+                onChange={handlePreprocessorChange}
+              />
             </div>
-          </div>
-
             
-            {/* ControlPanel */}
-            <div className="col-md-4 mb-3">
-            <div className="card bg-light shadow-sm h-100">
-              <div className="card-header">
-                <strong>Control Panel</strong>
-              </div>
-              <div className="card-body">
-                <ControlPanel 
-                  controls={controls}
-                  onControlChange={handleControlChange}
-                  onPlay={handlePlay}
-                  onStop={handleStop}
-                  onProcess={processAndUpdate}
-                  onProcessAndPlay={processAndPlay}
-                />
-              </div>
+            {/* Right column - 4/12 width - TOP RIGHT */}
+            <div className="col-md-4">
+            <ControlPanel 
+              controls={controls}
+              onControlChange={handleControlChange}
+              onPlay={handlePlay}
+              onStop={handleStop}
+              onProcess={processAndUpdate}
+              onProcessAndPlay={processAndPlay}
+            />
             </div>
-          </div>
-
           </div>
           
           <div className="row">
-            {/* Strudel Editor */}
+            {/* Left column - Strudel Editor */}
             <div className="col-md-8">
               <StrudelEditor 
                 editorRef={editorRef}
