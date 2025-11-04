@@ -16,7 +16,7 @@ export function processText(text, controls) {
     { name: 'p3', tag: '<p3_Radio>', label: 'Kick Drum' },
     { name: 'p4', tag: '<p4_Radio>', label: 'Shaker' },
     { name: 'p5', tag: '<p5_Radio>', label: 'Hi-Hats (Closed)' },
-    { name: 'p6', tag: '<p6_Radio>', label: 'Hi-Hats (Open)' }
+   
   ];
   
   controlInfo.forEach(control => {

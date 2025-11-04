@@ -130,7 +130,7 @@ export default function InstrumentControls({ controls, onControlChange }) {
         </div>
 
         <div className="instrument-item">
-  <div className="instrument-label">Hi-Hats (Closed)</div>  {/* Changed this */}
+  <div className="instrument-label">Hi-Hats (Fast)</div>  {/* Changed this */}
   <div className="radio-group-horizontal">
     <div className="form-check form-check-inline">
       <input
@@ -158,36 +158,6 @@ export default function InstrumentControls({ controls, onControlChange }) {
     </div>
   </div>
 </div>
-
-      <div className="instrument-item">
-        <div className="instrument-label">Hi-Hats (Open)</div>  {/* Changed this */}
-        <div className="radio-group-horizontal">
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="p6Control"
-              id="p6-on"
-              value="on"
-              checked={controls.p6 === 'on'}
-              onChange={(e) => onControlChange('p6', e.target.value)}
-            />
-            <label className="form-check-label" htmlFor="p6-on">ON</label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="p6Control"
-              id="p6-hush"
-              value="hush"
-              checked={controls.p6 === 'hush'}
-              onChange={(e) => onControlChange('p6', e.target.value)}
-            />
-            <label className="form-check-label" htmlFor="p6-hush">HUSH</label>
-          </div>
-        </div>
-      </div>
       </div>
     </div>
   );
