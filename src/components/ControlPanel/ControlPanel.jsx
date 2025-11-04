@@ -9,13 +9,13 @@ export default function ControlPanel({
   onPlay, 
   onStop, 
   onProcess, 
-  onProcessAndPlay 
+  onProcessAndPlay,
+  instruments 
 }) {
   return (
     <div className="control-panel">
       <h5>Controls</h5>
       
-      {/* Transport Controls (Play, Stop, Process) */}
       <TransportControls
         onPlay={onPlay}
         onStop={onStop}
@@ -25,10 +25,10 @@ export default function ControlPanel({
       
       <hr />
       
-      {/* Instrument Controls */}
       <InstrumentControls
         controls={controls}
         onControlChange={onControlChange}
+        instruments={instruments}
       />
     </div>
   );
