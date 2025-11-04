@@ -85,8 +85,17 @@ export default function App() {
   };
 
   return (
-    <div>
-      <h2>Strudel Reactor</h2>
+    <div className="bg-dark text-light min-vh-100">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary">
+        <div className="container-fluid">
+          <span className="navbar-brand">Strudel Reactor</span>
+
+          <span className="navbar-text">
+            React + Strudel Playground
+          </span>
+        </div>
+      </nav>
+
       <main>
         <div className="container-fluid">
           <div className="row">
