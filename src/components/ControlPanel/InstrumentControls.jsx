@@ -1,27 +1,11 @@
 import React from 'react';
 
-export default function InstrumentControls({ controls, onControlChange, instruments = [] }) {
+export default function InstrumentControls({ controls, onControlChange }) {
   return (
     <div className="instrument-controls">
-      {/* P1 Controls */}
-      <h6>Instrument P1</h6>
       
-      {/* P1 Dropdown */}
-      <div className="mb-2">
-        <label htmlFor="p1-select" className="form-label small">Select Instrument:</label>
-        <select
-          className="form-select form-select-sm"
-          id="p1-select"
-          value={controls.p1_instrument || 'drums'}
-          onChange={(e) => onControlChange('p1_instrument', e.target.value)}
-        >
-          {instruments.map(inst => (
-            <option key={inst.id} value={inst.id}>{inst.name}</option>
-          ))}
-        </select>
-      </div>
-      
-      {/* P1 Radio Buttons */}
+      {/* P1 - Bass Line */}
+      <h6>Bass Line</h6>
       <div className="form-check">
         <input
           className="form-check-input"
@@ -34,7 +18,6 @@ export default function InstrumentControls({ controls, onControlChange, instrume
         />
         <label className="form-check-label" htmlFor="p1-on">ON</label>
       </div>
-      
       <div className="form-check">
         <input
           className="form-check-input"
@@ -48,25 +31,8 @@ export default function InstrumentControls({ controls, onControlChange, instrume
         <label className="form-check-label" htmlFor="p1-hush">HUSH</label>
       </div>
 
-      {/* P2 Controls */}
-      <h6 style={{ marginTop: '1.5rem' }}>Instrument P2</h6>
-      
-      {/* P2 Dropdown */}
-      <div className="mb-2">
-        <label htmlFor="p2-select" className="form-label small">Select Instrument:</label>
-        <select
-          className="form-select form-select-sm"
-          id="p2-select"
-          value={controls.p2_instrument || 'drums2'}
-          onChange={(e) => onControlChange('p2_instrument', e.target.value)}
-        >
-          {instruments.map(inst => (
-            <option key={inst.id} value={inst.id}>{inst.name}</option>
-          ))}
-        </select>
-      </div>
-      
-      {/* P2 Radio Buttons */}
+      {/* P2 - Main Arp */}
+      <h6 style={{ marginTop: '1rem' }}>Main Arpeggio</h6>
       <div className="form-check">
         <input
           className="form-check-input"
@@ -79,7 +45,6 @@ export default function InstrumentControls({ controls, onControlChange, instrume
         />
         <label className="form-check-label" htmlFor="p2-on">ON</label>
       </div>
-      
       <div className="form-check">
         <input
           className="form-check-input"
@@ -92,6 +57,88 @@ export default function InstrumentControls({ controls, onControlChange, instrume
         />
         <label className="form-check-label" htmlFor="p2-hush">HUSH</label>
       </div>
+
+      {/* P3 - Kick Drum */}
+      <h6 style={{ marginTop: '1rem' }}>Kick Drum</h6>
+      <div className="form-check">
+        <input
+          className="form-check-input"
+          type="radio"
+          name="p3Control"
+          id="p3-on"
+          value="on"
+          checked={controls.p3 === 'on'}
+          onChange={(e) => onControlChange('p3', e.target.value)}
+        />
+        <label className="form-check-label" htmlFor="p3-on">ON</label>
+      </div>
+      <div className="form-check">
+        <input
+          className="form-check-input"
+          type="radio"
+          name="p3Control"
+          id="p3-hush"
+          value="hush"
+          checked={controls.p3 === 'hush'}
+          onChange={(e) => onControlChange('p3', e.target.value)}
+        />
+        <label className="form-check-label" htmlFor="p3-hush">HUSH</label>
+      </div>
+
+      {/* P4 - Shaker */}
+      <h6 style={{ marginTop: '1rem' }}>Shaker</h6>
+      <div className="form-check">
+        <input
+          className="form-check-input"
+          type="radio"
+          name="p4Control"
+          id="p4-on"
+          value="on"
+          checked={controls.p4 === 'on'}
+          onChange={(e) => onControlChange('p4', e.target.value)}
+        />
+        <label className="form-check-label" htmlFor="p4-on">ON</label>
+      </div>
+      <div className="form-check">
+        <input
+          className="form-check-input"
+          type="radio"
+          name="p4Control"
+          id="p4-hush"
+          value="hush"
+          checked={controls.p4 === 'hush'}
+          onChange={(e) => onControlChange('p4', e.target.value)}
+        />
+        <label className="form-check-label" htmlFor="p4-hush">HUSH</label>
+      </div>
+
+      {/* P5 - Hi-Hats */}
+      <h6 style={{ marginTop: '1rem' }}>Hi-Hats</h6>
+      <div className="form-check">
+        <input
+          className="form-check-input"
+          type="radio"
+          name="p5Control"
+          id="p5-on"
+          value="on"
+          checked={controls.p5 === 'on'}
+          onChange={(e) => onControlChange('p5', e.target.value)}
+        />
+        <label className="form-check-label" htmlFor="p5-on">ON</label>
+      </div>
+      <div className="form-check">
+        <input
+          className="form-check-input"
+          type="radio"
+          name="p5Control"
+          id="p5-hush"
+          value="hush"
+          checked={controls.p5 === 'hush'}
+          onChange={(e) => onControlChange('p5', e.target.value)}
+        />
+        <label className="form-check-label" htmlFor="p5-hush">HUSH</label>
+      </div>
+      
     </div>
   );
 }

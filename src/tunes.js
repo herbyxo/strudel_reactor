@@ -41,7 +41,7 @@ const bass = 0
 
 bassline:
 note(pick(basslines, bass))
-.sound("supersaw")
+.sound("<p1_Radio>supersaw")
 .postgain(2)
 .room(0.6)
 .lpf(700)
@@ -51,7 +51,7 @@ note(pick(basslines, bass))
 
 main_arp: 
 note(pick(arpeggiator1, "<0 1 2 3>/2"))
-.sound("supersaw")
+.sound("<p2_Radio>supersaw")
 .lpf(300)
 .adsr("0:0:.5:.1")
 .room(0.6)
@@ -61,13 +61,13 @@ note(pick(arpeggiator1, "<0 1 2 3>/2"))
 
 drums:
 stack(
-  s("tech:5")
+  s("<p3_Radio>tech:5")
   .postgain(6)
   .pcurve(2)
   .pdec(1)
   .struct(pick(drum_structure, pattern)),
 
-  s("sh").struct("[x!3 ~!2 x!10 ~]")
+  s("<p4_Radio>sh").struct("[x!3 ~!2 x!10 ~]")
   .postgain(0.5).lpf(7000)
   .bank("RolandTR808")
   .speed(0.8).jux(rev).room(sine.range(0.1,0.4)).gain(0.6),
@@ -79,8 +79,8 @@ stack(
 
 drums2: 
 stack(
-  s("[~ hh]*4").bank("RolandTR808").room(0.3).speed(0.75).gain(1.2),
-  s("hh").struct("x*16").bank("RolandTR808")
+  s("[~ <p5_Radio>hh]*4").bank("RolandTR808").room(0.3).speed(0.75).gain(1.2),
+  s("<p5_Radio>hh").struct("x*16").bank("RolandTR808")
   .gain(0.6)
   .jux(rev)
   .room(sine.range(0.1,0.4))
@@ -98,10 +98,3 @@ stack(
 // all(x => x.log())
 
 // @version 1.2`;
-
-export const instruments = [
-  { id: 'drums', name: 'Main Drums' },
-  { id: 'drums2', name: 'Hi-Hats' },
-  { id: 'bassline', name: 'Bass Line' },
-  { id: 'main_arp', name: 'Main Arpeggio' }
-];
