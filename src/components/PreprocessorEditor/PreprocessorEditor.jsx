@@ -9,7 +9,7 @@ export default function PreprocessorEditor({ value, onChange }) {
   return (
     <div className="preprocessor-editor">
       <label htmlFor="preprocessor-textarea" className="form-label">
-        Text to preprocess:
+        Text to Preprocess:
       </label>
       <textarea
         className="form-control"
