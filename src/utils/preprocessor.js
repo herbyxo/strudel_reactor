@@ -9,42 +9,45 @@
 export function processText(text, controls) {
   let processed = text;
   
-  // Process p1 control (Bass)
-  if (controls.p1 === 'hush') {
-    processed = replaceTag(processed, '<p1_Radio>', '_');
-  } else {
-    processed = replaceTag(processed, '<p1_Radio>', '');
-  }
+  // Process each control and add comments
+  const controlInfo = [
+    { name: 'p1', tag: '<p1_Radio>', label: 'Bass Line' },
+    { name: 'p2', tag: '<p2_Radio>', label: 'Arpeggio' },
+    { name: 'p3', tag: '<p3_Radio>', label: 'Kick Drum' },
+    { name: 'p4', tag: '<p4_Radio>', label: 'Shaker' },
+    { name: 'p5', tag: '<p5_Radio>', label: 'Hi-Hats (Closed)' },
+    { name: 'p6', tag: '<p6_Radio>', label: 'Hi-Hats (Open)' }
+  ];
   
-  // Process p2 control (Arp)
-  if (controls.p2 === 'hush') {
-    processed = replaceTag(processed, '<p2_Radio>', '_');
-  } else {
-    processed = replaceTag(processed, '<p2_Radio>', '');
-  }
-  
-  // Process p3 control (Kick)
-  if (controls.p3 === 'hush') {
-    processed = replaceTag(processed, '<p3_Radio>', '_');
-  } else {
-    processed = replaceTag(processed, '<p3_Radio>', '');
-  }
-  
-  // Process p4 control (Shaker)
-  if (controls.p4 === 'hush') {
-    processed = replaceTag(processed, '<p4_Radio>', '_');
-  } else {
-    processed = replaceTag(processed, '<p4_Radio>', '');
-  }
-  
-  // Process p5 control (Hi-Hats)
-  if (controls.p5 === 'hush') {
-    processed = replaceTag(processed, '<p5_Radio>', '_');
-  } else {
-    processed = replaceTag(processed, '<p5_Radio>', '');
-  }
+  controlInfo.forEach(control => {
+    if (controls[control.name] === 'hush') {
+      // Replace tag with underscore and add comment
+      processed = addMuteComment(processed, control.tag, control.label);
+      processed = replaceTag(processed, control.tag, '_');
+    } else {
+      // Just remove the tag
+      processed = replaceTag(processed, control.tag, '');
+    }
+  });
   
   return processed;
+}
+
+/**
+ * Add a comment at the end of lines containing the tag
+ */
+function addMuteComment(text, tag, instrumentName) {
+  const lines = text.split('\n');
+  
+  for (let i = 0; i < lines.length; i++) {
+    // If line contains the tag and doesn't already have a MUTED comment
+    if (lines[i].includes(tag) && !lines[i].includes('// MUTED:')) {
+      // Add comment at the end of the line
+      lines[i] = lines[i].trimEnd() + ` // MUTED: ${instrumentName}`;
+    }
+  }
+  
+  return lines.join('\n');
 }
 
 export function validatePreprocessorText(text) {

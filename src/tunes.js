@@ -80,7 +80,7 @@ stack(
 drums2: 
 stack(
   s("[~ <p5_Radio>hh]*4").bank("RolandTR808").room(0.3).speed(0.75).gain(1.2),
-  s("<p5_Radio>hh").struct("x*16").bank("RolandTR808")
+  s("<p6_Radio>hh").struct("x*16").bank("RolandTR808")
   .gain(0.6)
   .jux(rev)
   .room(sine.range(0.1,0.4))

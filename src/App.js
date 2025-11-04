@@ -21,6 +21,7 @@ export default function App() {
     p3: 'on',  // Kick
     p4: 'on',  // Shaker
     p5: 'on',  // Hi-Hats
+    p6: 'on',  // Rim/Clap
   });
   
   // Ref to hold the Strudel editor instance

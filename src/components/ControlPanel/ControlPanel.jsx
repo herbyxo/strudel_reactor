@@ -9,8 +9,7 @@ export default function ControlPanel({
   onPlay, 
   onStop, 
   onProcess, 
-  onProcessAndPlay,
-  instruments 
+  onProcessAndPlay 
 }) {
   return (
     <div className="control-panel">
@@ -28,7 +27,6 @@ export default function ControlPanel({
       <InstrumentControls
         controls={controls}
         onControlChange={onControlChange}
-        instruments={instruments}
       />
     </div>
   );

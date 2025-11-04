@@ -1,0 +1,53 @@
+.instrument-controls {
+    margin-top: 1rem;
+  }
+  
+  .section-title {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #495057;
+    padding-bottom: 0.5rem;
+  }
+  
+  .instruments-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  
+  .instrument-item {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 0.75rem;
+    text-align: center;
+  }
+  
+  .instrument-label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: #495057;
+  }
+  
+  .radio-group-horizontal {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .radio-group-horizontal .form-check-inline {
+    margin: 0;
+  }
+  
+  .radio-group-horizontal .form-check-label {
+    font-size: 0.85rem;
+    margin-left: 0.25rem;
+  }
+  
+  /* Responsive: stack on small screens */
+  @media (max-width: 768px) {
+    .instruments-grid {
+      grid-template-columns: 1fr;
+    }
+  }
