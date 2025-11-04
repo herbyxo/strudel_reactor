@@ -2,7 +2,8 @@ import './App.css';
 import { useState, useRef } from 'react';
 import PreprocessorEditor from './components/PreprocessorEditor/PreprocessorEditor';
 import StrudelEditor from './components/StrudelEditor/StrudelEditor';
-import ControlPanel from './components/ControlPanel/ControlPanel';
+import TransportControls from './components/ControlPanel/TransportControls';
+import InstrumentControls from './components/ControlPanel/InstrumentControls';
 import PianoRoll from './components/Visualizer/PianoRoll';
 import { stranger_tune, instruments } from './tunes';
 import { processText } from './utils/preprocessor';
@@ -91,7 +92,7 @@ export default function App() {
       <main>
         <div className="container-fluid">
           <div className="row">
-            {/* Left column - 8/12 width */}
+            {/* Preprocessor Editor - Top Left */}
             <div className="col-md-8">
               <PreprocessorEditor 
                 value={rawText}
@@ -99,21 +100,25 @@ export default function App() {
               />
             </div>
             
-            {/* Right column - 4/12 width - TOP RIGHT */}
-            <div className="col-md-4">
-              <ControlPanel 
-                controls={controls}
-                onControlChange={handleControlChange}
+            {/* Controls - Top Right */}
+            <div className="col-md-4" style={{ padding: '1rem' }}>
+              <h5>Controls</h5>
+              <TransportControls 
                 onPlay={handlePlay}
                 onStop={handleStop}
                 onProcess={processAndUpdate}
                 onProcessAndPlay={processAndPlay}
               />
+              <hr />
+              <InstrumentControls
+                controls={controls}
+                onControlChange={handleControlChange}
+              />
             </div>
           </div>
           
           <div className="row">
-            {/* Left column - Strudel Editor */}
+            {/* Strudel Editor - Bottom Left */}
             <div className="col-md-8">
               <StrudelEditor 
                 editorRef={editorRef}
@@ -121,7 +126,7 @@ export default function App() {
               />
             </div>
             
-            {/* Right column - Empty for now */}
+            {/* Additional space - Bottom Right */}
             <div className="col-md-4">
               <div style={{ padding: '1rem' }}>
                 <p className="text-muted">Additional controls will appear here</p>
@@ -130,6 +135,7 @@ export default function App() {
           </div>
         </div>
         
+        {/* Piano Roll Visualizer */}
         <PianoRoll />
       </main>
     </div>
