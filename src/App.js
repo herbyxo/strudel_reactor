@@ -85,17 +85,35 @@ export default function App() {
     }
   };
 
+  // Handler for loading a saved tune
+  const handleLoadTune = (tuneCode) => {
+    setRawText(tuneCode);
+    process();
+  };
+
   return (
     <div className="bg-dark text-light min-vh-100">
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary">
-        <div className="container-fluid">
-          <span className="navbar-brand">Strudel Reactor</span>
+
+      {/* NavBar */}
+      <nav className="navbar navbar-expand-lg navbar-dark bg-darker-grey border-bottom border-secondary">
+      <div className="container-fluid">
+        <span className="navbar-brand">Strudel Reactor</span>
+        
+        {/* FileManager */}
+        <div className="ms-auto">
+          <FileManager 
+            currentTune={rawText}
+            onLoadTune={handleLoadTune}
+          />
         </div>
-      </nav>
+      </div>
+    </nav>
   
+    {/* Main */}
       <main>
         <div className="container-fluid">
           <div className="row mt-3">
+
             {/* Preprocessor */}
             <div className="col-md-8 mb-3">
               <div className="card bg-darker-grey shadow-sm h-100">
