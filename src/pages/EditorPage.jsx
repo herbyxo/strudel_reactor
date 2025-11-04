@@ -67,7 +67,7 @@ export default function EditorPage() {
     <div className="bg-dark text-light min-vh-100">
       <main>
         <div className="container-fluid">
-          <div className="row mt-3">
+          <div className="row pt-3">
             {/* Preprocessor */}
             <div className="col-md-8 mb-3">
               <div className="card bg-darker-grey shadow-sm h-100">
@@ -121,6 +121,10 @@ export default function EditorPage() {
           </div>
         </div>
       </main>
+
+      <div style={{ display: 'none' }}>
+        <canvas id="roll"></canvas>
+      </div>
     </div>
   );
 }

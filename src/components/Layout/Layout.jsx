@@ -14,12 +14,14 @@ export default function Layout({ children }) {
           <div className="navbar-nav ms-auto">
             <Link 
               to="/" 
-              className="nav-link active">
+              className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+            >
               Editor
             </Link>
             <Link 
               to="/visualizer" 
-              className="nav-link">
+              className={`nav-link ${location.pathname === '/visualizer' ? 'active' : ''}`}
+            >
               Visualizer
             </Link>
           </div>
