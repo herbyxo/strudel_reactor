@@ -6,6 +6,7 @@ import ControlPanel from './components/ControlPanel/ControlPanel';
 import PianoRoll from './components/Visualizer/PianoRoll';
 import { stranger_tune} from './tunes';
 import { processText } from './utils/preprocessor';
+import FileManager from './components/FileManager/FileManager';
 
 export default function App() {
   // State for raw preprocessor text
@@ -86,7 +87,7 @@ export default function App() {
 
   return (
     <div className="bg-dark text-light min-vh-100">
-      <nav className="navbar navbar-expand-lg navbar-dark bg-darker border-bottom border-secondary">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary">
         <div className="container-fluid">
           <span className="navbar-brand">Strudel Reactor</span>
         </div>
