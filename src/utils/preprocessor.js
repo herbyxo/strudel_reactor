@@ -29,6 +29,13 @@
     } else {
       processed = replaceTag(processed, '<p1_Radio>', '');
     }
+
+    // Process p2 control
+    if (controls.p2 === 'hush') {
+      processed = replaceTag(processed, '<p2_Radio>', '_');
+    } else {
+      processed = replaceTag(processed, '<p2_Radio>', '');
+    }
     
     return processed;
   }

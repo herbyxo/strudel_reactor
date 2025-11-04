@@ -4,7 +4,7 @@ import PreprocessorEditor from './components/PreprocessorEditor/PreprocessorEdit
 import StrudelEditor from './components/StrudelEditor/StrudelEditor';
 import ControlPanel from './components/ControlPanel/ControlPanel';
 import PianoRoll from './components/Visualizer/PianoRoll';
-import { stranger_tune } from './tunes';
+import { stranger_tune, instruments } from './tunes';
 import { processText } from './utils/preprocessor';
 
 export default function App() {
@@ -15,8 +15,14 @@ export default function App() {
   const [processedText, setProcessedText] = useState('');
   
   // State for control values
-  const [controls, setControls] = useState({
+  const [controls, setControls] = useState({ 
     p1: 'on',
+    p1_instrument: 'drums',  // Which instrument P1 controls
+    p2: 'on',
+    p2_instrument: 'hihat',  // Which instrument P2 controls
+    volume: 100,
+    reverb: false,
+    bpm: 120
   });
   
   // Ref to hold the Strudel editor instance
