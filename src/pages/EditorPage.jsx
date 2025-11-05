@@ -2,11 +2,12 @@ import React, { useState, useRef } from 'react';
 import PreprocessorEditor from '../components/PreprocessorEditor/PreprocessorEditor';
 import StrudelEditor from '../components/StrudelEditor/StrudelEditor';
 import ControlPanel from '../components/ControlPanel/ControlPanel';
-import { stranger_tune } from '../tunes';
+import { useTune } from '../context/TuneContext';
 import { processText } from '../utils/preprocessor';
+//import { stranger_tune } from '../tunes';
 
 export default function EditorPage() {
-  const [rawText, setRawText] = useState(stranger_tune);
+  const [rawText, setRawText] = useTune();
   const [processedText, setProcessedText] = useState('');
   const [controls, setControls] = useState({
     p1: 'on',
