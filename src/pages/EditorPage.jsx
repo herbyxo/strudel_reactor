@@ -1,10 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PreprocessorEditor from '../components/PreprocessorEditor/PreprocessorEditor';
 import StrudelEditor from '../components/StrudelEditor/StrudelEditor';
 import ControlPanel from '../components/ControlPanel/ControlPanel';
 import { useTune } from '../context/TuneContext';
 import { processText } from '../utils/preprocessor';
-//import { stranger_tune } from '../tunes';
 
 export default function EditorPage() {
   const { rawText, setRawText } = useTune();
@@ -18,19 +17,29 @@ export default function EditorPage() {
   });
   const editorRef = useRef(null);
 
+  // Process the initial tune when component mounts
+  useEffect(() => {
+    console.log('EditorPage mounted, processing initial tune...');
+    const processed = processText(rawText, controls);
+    setProcessedText(processed);
+  }, []); // Run only once on mount
+
   const handlePreprocessorChange = (newText) => {
     setRawText(newText);
   };
 
   const handleControlChange = (controlName, value) => {
+    console.log(`Control changed: ${controlName} = ${value}`);
     setControls(prev => ({ ...prev, [controlName]: value }));
     
+    // If music is playing, reprocess and update
     if (editorRef.current && editorRef.current.repl?.state?.started) {
       processAndUpdate();
     }
   };
 
   const process = () => {
+    console.log('Processing text...');
     const processed = processText(rawText, controls);
     setProcessedText(processed);
     
@@ -44,23 +53,33 @@ export default function EditorPage() {
   };
 
   const processAndPlay = () => {
+    console.log('Process and Play clicked');
     process();
     setTimeout(() => {
       if (editorRef.current) {
+        console.log('Evaluating...');
         editorRef.current.evaluate();
+      } else {
+        console.error('Editor ref is null!');
       }
     }, 50);
   };
 
   const handlePlay = () => {
+    console.log('Play clicked');
     if (editorRef.current) {
       editorRef.current.evaluate();
+    } else {
+      console.error('Editor ref is null!');
     }
   };
 
   const handleStop = () => {
+    console.log('Stop clicked');
     if (editorRef.current) {
       editorRef.current.stop();
+    } else {
+      console.error('Editor ref is null!');
     }
   };
 
@@ -122,8 +141,6 @@ export default function EditorPage() {
           </div>
         </div>
       </main>
-
-      
     </div>
   );
 }
