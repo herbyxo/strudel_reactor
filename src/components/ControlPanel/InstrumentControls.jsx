@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './css/InstrumentControls.css';
 
 export default function InstrumentControls({ controls, onControlChange }) {
+  
+  
+  useEffect(() => {
+    
+    const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltips.forEach(tooltip => {
+      new window.bootstrap.Tooltip(tooltip);
+    });
+  }, []);
+
   return (
     <div className="instrument-controls">
       <h6 className="section-title">Instrument Controls</h6>
       
       <div className="instruments-grid">
-        {/* Row 1 */}
+        {/* Bass Line */}
         <div className="instrument-item">
-          <div className="instrument-label">Bass Line</div>
+          <div 
+            className="instrument-label"
+            data-bs-toggle="tooltip"
+            title="Deep bass synthesizer"
+          >
+            Bass Line
+          </div>
           <div className="radio-group-horizontal">
             <div className="form-check form-check-inline">
               <input
@@ -38,8 +54,15 @@ export default function InstrumentControls({ controls, onControlChange }) {
           </div>
         </div>
 
+        {/* Arpeggio */}
         <div className="instrument-item">
-          <div className="instrument-label">Arpeggio</div>
+          <div 
+            className="instrument-label"
+            data-bs-toggle="tooltip"
+            title="Arpeggiated synth pattern"
+          >
+            Arpeggio
+          </div>
           <div className="radio-group-horizontal">
             <div className="form-check form-check-inline">
               <input
@@ -68,8 +91,15 @@ export default function InstrumentControls({ controls, onControlChange }) {
           </div>
         </div>
 
+        {/* Kick Drum */}
         <div className="instrument-item">
-          <div className="instrument-label">Kick Drum</div>
+          <div 
+            className="instrument-label"
+            data-bs-toggle="tooltip"
+            title="Kick drum rhythm pattern"
+          >
+            Kick Drum
+          </div>
           <div className="radio-group-horizontal">
             <div className="form-check form-check-inline">
               <input
@@ -98,9 +128,15 @@ export default function InstrumentControls({ controls, onControlChange }) {
           </div>
         </div>
 
-        {/* Row 2 */}
+        {/* Shaker */}
         <div className="instrument-item">
-          <div className="instrument-label">Shaker</div>
+          <div 
+            className="instrument-label"
+            data-bs-toggle="tooltip"
+            title="Shaker percussion texture"
+          >
+            Shaker
+          </div>
           <div className="radio-group-horizontal">
             <div className="form-check form-check-inline">
               <input
@@ -129,35 +165,42 @@ export default function InstrumentControls({ controls, onControlChange }) {
           </div>
         </div>
 
+        {/* Hi-Hats */}
         <div className="instrument-item">
-  <div className="instrument-label">Hi-Hats (Fast)</div>  {/* Changed this */}
-  <div className="radio-group-horizontal">
-    <div className="form-check form-check-inline">
-      <input
-        className="form-check-input"
-        type="radio"
-        name="p5Control"
-        id="p5-on"
-        value="on"
-        checked={controls.p5 === 'on'}
-        onChange={(e) => onControlChange('p5', e.target.value)}
-      />
-      <label className="form-check-label" htmlFor="p5-on">ON</label>
-    </div>
-    <div className="form-check form-check-inline">
-      <input
-        className="form-check-input"
-        type="radio"
-        name="p5Control"
-        id="p5-hush"
-        value="hush"
-        checked={controls.p5 === 'hush'}
-        onChange={(e) => onControlChange('p5', e.target.value)}
-      />
-      <label className="form-check-label" htmlFor="p5-hush">HUSH</label>
-    </div>
-  </div>
-</div>
+          <div 
+            className="instrument-label"
+            data-bs-toggle="tooltip"
+            title="Fast hi-hat rhythm"
+          >
+            Hi-Hats (Fast)
+          </div>
+          <div className="radio-group-horizontal">
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="p5Control"
+                id="p5-on"
+                value="on"
+                checked={controls.p5 === 'on'}
+                onChange={(e) => onControlChange('p5', e.target.value)}
+              />
+              <label className="form-check-label" htmlFor="p5-on">ON</label>
+            </div>
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="p5Control"
+                id="p5-hush"
+                value="hush"
+                checked={controls.p5 === 'hush'}
+                onChange={(e) => onControlChange('p5', e.target.value)}
+              />
+              <label className="form-check-label" htmlFor="p5-hush">HUSH</label>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
