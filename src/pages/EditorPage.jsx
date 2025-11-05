@@ -7,7 +7,7 @@ import { processText } from '../utils/preprocessor';
 //import { stranger_tune } from '../tunes';
 
 export default function EditorPage() {
-  const [rawText, setRawText] = useTune();
+  const { rawText, setRawText } = useTune();
   const [processedText, setProcessedText] = useState('');
   const [controls, setControls] = useState({
     p1: 'on',
@@ -123,9 +123,7 @@ export default function EditorPage() {
         </div>
       </main>
 
-      <div style={{ display: 'none' }}>
-        <canvas id="roll"></canvas>
-      </div>
+      
     </div>
   );
 }
