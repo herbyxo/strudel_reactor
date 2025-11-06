@@ -15,9 +15,8 @@ export default function EditorPage() {
     p4: 'on',
     p5: 'on',
   });
-  const editorRef = useRef(null);
-
   const [tempo, setTempo] = useState(140);
+  const editorRef = useRef(null);
 
   // Process the initial tune when component mounts
   useEffect(() => {
@@ -34,15 +33,14 @@ export default function EditorPage() {
     console.log(`Control changed: ${controlName} = ${value}`);
     setControls(prev => ({ ...prev, [controlName]: value }));
     
-    // If music is playing, reprocess and update
     if (editorRef.current && editorRef.current.repl?.state?.started) {
       processAndUpdate();
     }
   };
 
   const process = () => {
-    console.log('Processing text...');
-    const processed = processText(rawText, controls, tempo); 
+    console.log('Processing text with tempo:', tempo);
+    const processed = processText(rawText, controls, tempo);
     setProcessedText(processed);
     
     if (editorRef.current) {
@@ -119,8 +117,8 @@ export default function EditorPage() {
                     onStop={handleStop}
                     onProcess={processAndUpdate}
                     onProcessAndPlay={processAndPlay}
-                    tempo = {tempo}
-                    onTempoChange = {setTempo}
+                    tempo={tempo}
+                    onTempoChange={setTempo}
                   />
                 </div>
               </div>

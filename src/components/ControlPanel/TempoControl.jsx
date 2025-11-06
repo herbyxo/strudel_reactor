@@ -34,8 +34,6 @@ export default function TempoControl({ tempo, onTempoChange }) {
           step="5"
           value={tempo}
           onChange={(e) => onTempoChange(Number(e.target.value))}
-          data-bs-toggle="tooltip"
-          title={`Set tempo to ${tempo} BPM`}
         />
         
         <div className="tempo-labels">

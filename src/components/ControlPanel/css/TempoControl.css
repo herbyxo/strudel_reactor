@@ -2,6 +2,8 @@
     margin-top: 1rem;
     padding-top: 1rem;
     border-top: 1px solid #444;
+    color: #e0e0e0; /* Light text */
+
   }
   
   .tempo-slider-container {
@@ -13,16 +15,22 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.5rem;
+  color: #e0e0e0; /* Light text */
+
   }
   
   .tempo-labels {
     display: flex;
     justify-content: space-between;
     margin-top: 0.25rem;
+  color: #e0e0e0; /* Light text */
+
   }
   
   .tempo-labels small {
     font-size: 0.7rem;
+  color: #e0e0e0; /* Light text */
+
   }
   
   /* Custom range slider styling for dark theme */

@@ -4,6 +4,7 @@ import './FileManager.css';
 export default function FileManager({ currentTune, onLoadTune }) {
   const [savedTunes, setSavedTunes] = useState([]);
   const [tuneName, setTuneName] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
 
   // Load saved tunes from localStorage on mount
   useEffect(() => {
@@ -35,13 +36,15 @@ export default function FileManager({ currentTune, onLoadTune }) {
 
   // Load a tune
   const handleLoad = (tune) => {
+    setIsOpen(false);
     if (window.confirm(`Load tune "${tune.name}"?`)) {
       onLoadTune(tune.code);
     }
   };
 
   // Delete a tune
-  const handleDelete = (index) => {
+  const handleDelete = (index, event) => {
+    event.stopPropagation(); // Prevent dropdown from closing
     if (window.confirm(`Delete tune "${savedTunes[index].name}"?`)) {
       const updatedTunes = savedTunes.filter((_, i) => i !== index);
       setSavedTunes(updatedTunes);
@@ -56,36 +59,37 @@ export default function FileManager({ currentTune, onLoadTune }) {
         <button 
           className="btn btn-sm btn-outline-secondary dropdown-toggle" 
           type="button" 
-          id="tunesDropdown" 
-          data-bs-toggle="dropdown" 
-          aria-expanded="false"
+          onClick={() => setIsOpen(!isOpen)}
         >
           Saved Tunes ({savedTunes.length})
         </button>
-        <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="tunesDropdown">
-          {savedTunes.length === 0 ? (
-            <li><span className="dropdown-item-text">No saved tunes</span></li>
-          ) : (
-            savedTunes.map((tune, index) => (
-              <li key={index}>
-                <div className="dropdown-item-custom">
-                  <button 
-                    className="btn btn-sm btn-link text-light"
-                    onClick={() => handleLoad(tune)}
-                  >
-                    {tune.name}
-                  </button>
-                  <button 
-                    className="btn btn-sm btn-danger"
-                    onClick={() => handleDelete(index)}
-                  >
-                    ×
-                  </button>
-                </div>
-              </li>
-            ))
-          )}
-        </ul>
+        
+        {isOpen && (
+          <ul className="dropdown-menu dropdown-menu-dark show">
+            {savedTunes.length === 0 ? (
+              <li><span className="dropdown-item-text">No saved tunes</span></li>
+            ) : (
+              savedTunes.map((tune, index) => (
+                <li key={index}>
+                  <div className="dropdown-item-custom">
+                    <button 
+                      className="btn btn-sm btn-link text-light"
+                      onClick={() => handleLoad(tune)}
+                    >
+                      {tune.name}
+                    </button>
+                    <button 
+                      className="btn btn-sm btn-danger"
+                      onClick={(e) => handleDelete(index, e)}
+                    >
+                      ×
+                    </button>
+                  </div>
+                </li>
+              ))
+            )}
+          </ul>
+        )}
       </div>
 
       {/* Save new tune */}
