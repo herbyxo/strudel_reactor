@@ -17,10 +17,12 @@ export default function EditorPage() {
   });
   const editorRef = useRef(null);
 
+  const [tempo, setTempo] = useState(140);
+
   // Process the initial tune when component mounts
   useEffect(() => {
     console.log('EditorPage mounted, processing initial tune...');
-    const processed = processText(rawText, controls);
+    const processed = processText(rawText, controls, tempo);
     setProcessedText(processed);
   }, []); // Run only once on mount
 
@@ -40,7 +42,7 @@ export default function EditorPage() {
 
   const process = () => {
     console.log('Processing text...');
-    const processed = processText(rawText, controls);
+    const processed = processText(rawText, controls, tempo); 
     setProcessedText(processed);
     
     if (editorRef.current) {
@@ -117,6 +119,8 @@ export default function EditorPage() {
                     onStop={handleStop}
                     onProcess={processAndUpdate}
                     onProcessAndPlay={processAndPlay}
+                    tempo = {tempo}
+                    onTempoChange = {setTempo}
                   />
                 </div>
               </div>

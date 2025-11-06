@@ -6,8 +6,11 @@
   return text.replaceAll(tag, replacement);
 }
 
-export function processText(text, controls) {
+export function processText(text, controls, tempo = 140) {
   let processed = text;
+  
+  // Process tempo tag
+  processed = replaceTag(processed, '<tempo>', tempo.toString());
   
   // Process each control and add comments
   const controlInfo = [
@@ -16,7 +19,6 @@ export function processText(text, controls) {
     { name: 'p3', tag: '<p3_Radio>', label: 'Kick Drum' },
     { name: 'p4', tag: '<p4_Radio>', label: 'Shaker' },
     { name: 'p5', tag: '<p5_Radio>', label: 'Hi-Hats (Closed)' },
-   
   ];
   
   controlInfo.forEach(control => {
