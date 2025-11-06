@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { stranger_tune } from '../../tunes';
 import './FileManager.css';
 
 export default function FileManager({ currentTune, onLoadTune }) {
   const [savedTunes, setSavedTunes] = useState([]);
   const [tuneName, setTuneName] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   // Load saved tunes from localStorage on mount
   useEffect(() => {
@@ -13,6 +15,23 @@ export default function FileManager({ currentTune, onLoadTune }) {
       setSavedTunes(JSON.parse(saved));
     }
   }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
 
   // Save current tune
   const handleSave = () => {
@@ -34,7 +53,15 @@ export default function FileManager({ currentTune, onLoadTune }) {
     alert(`Tune "${tuneName}" saved!`);
   };
 
-  // Load a tune
+  // Load default tune
+  const handleLoadDefault = () => {
+    setIsOpen(false);
+    if (window.confirm('Load the default tune? Any unsaved changes will be lost.')) {
+      onLoadTune(stranger_tune);
+    }
+  };
+
+  // Load a saved tune
   const handleLoad = (tune) => {
     setIsOpen(false);
     if (window.confirm(`Load tune "${tune.name}"?`)) {
@@ -44,7 +71,7 @@ export default function FileManager({ currentTune, onLoadTune }) {
 
   // Delete a tune
   const handleDelete = (index, event) => {
-    event.stopPropagation(); // Prevent dropdown from closing
+    event.stopPropagation();
     if (window.confirm(`Delete tune "${savedTunes[index].name}"?`)) {
       const updatedTunes = savedTunes.filter((_, i) => i !== index);
       setSavedTunes(updatedTunes);
@@ -53,7 +80,7 @@ export default function FileManager({ currentTune, onLoadTune }) {
   };
 
   return (
-    <div className="file-manager">
+    <div className="file-manager" ref={dropdownRef}>
       {/* Dropdown showing saved tunes */}
       <div className="dropdown">
         <button 
@@ -66,6 +93,22 @@ export default function FileManager({ currentTune, onLoadTune }) {
         
         {isOpen && (
           <ul className="dropdown-menu dropdown-menu-dark show">
+            {/* Default tune option */}
+            <li>
+              <button 
+                className="dropdown-item"
+                onClick={handleLoadDefault}
+              >
+                <strong>Load Default Tune</strong>
+              </button>
+            </li>
+            
+            {/* Divider if there are saved tunes */}
+            {savedTunes.length > 0 && (
+              <li><hr className="dropdown-divider" /></li>
+            )}
+            
+            {/* Saved tunes */}
             {savedTunes.length === 0 ? (
               <li><span className="dropdown-item-text">No saved tunes</span></li>
             ) : (
