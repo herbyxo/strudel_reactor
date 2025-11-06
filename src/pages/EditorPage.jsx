@@ -15,7 +15,16 @@ export default function EditorPage() {
     p4: 'on',
     p5: 'on',
   });
+
+  // tempo
   const [tempo, setTempo] = useState(140);
+
+  // effects
+  const [volume, setVolume] = useState(80);   
+  const [reverb, setReverb] = useState(40);   
+  const [delay, setDelay] = useState(20); 
+
+
   const editorRef = useRef(null);
 
   // Process the initial tune when component mounts
@@ -110,16 +119,22 @@ export default function EditorPage() {
                   <strong className="text-light">Control Panel</strong>
                 </div>
                 <div className="card-body">
-                  <ControlPanel 
-                    controls={controls}
-                    onControlChange={handleControlChange}
-                    onPlay={handlePlay}
-                    onStop={handleStop}
-                    onProcess={processAndUpdate}
-                    onProcessAndPlay={processAndPlay}
-                    tempo={tempo}
-                    onTempoChange={setTempo}
-                  />
+                <ControlPanel 
+                  controls={controls}
+                  onControlChange={handleControlChange}
+                  onPlay={handlePlay}
+                  onStop={handleStop}
+                  onProcess={processAndUpdate}
+                  onProcessAndPlay={processAndPlay}
+                  tempo={tempo}
+                  onTempoChange={setTempo}
+                  volume={volume}           
+                  onVolumeChange={setVolume}   
+                  reverb={reverb}           
+                  onReverbChange={setReverb}   
+                  delay={delay}             
+                  onDelayChange={setDelay}     
+                />
                 </div>
               </div>
             </div>

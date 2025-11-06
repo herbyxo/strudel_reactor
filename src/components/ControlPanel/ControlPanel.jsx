@@ -2,6 +2,7 @@ import React from 'react';
 import TransportControls from './TransportControls';
 import InstrumentControls from './InstrumentControls';
 import TempoControl from './TempoControl';
+import EffectsControl from './EffectsControl';
 import './css/ControlPanel.css';
 
 export default function ControlPanel({ 
@@ -12,7 +13,13 @@ export default function ControlPanel({
   onProcess, 
   onProcessAndPlay,
   tempo,
-  onTempoChange
+  onTempoChange,
+  volume,
+  onVolumeChange,
+  reverb,
+  onReverbChange,
+  delay,
+  onDelayChange
 }) {
   return (
     <div className="control-panel">
@@ -30,6 +37,17 @@ export default function ControlPanel({
       <TempoControl
         tempo={tempo}
         onTempoChange={onTempoChange}
+      />
+      
+      <hr />
+      
+      <EffectsControl
+        volume={volume}
+        onVolumeChange={onVolumeChange}
+        reverb={reverb}
+        onReverbChange={onReverbChange}
+        delay={delay}
+        onDelayChange={onDelayChange}
       />
       
       <hr />
