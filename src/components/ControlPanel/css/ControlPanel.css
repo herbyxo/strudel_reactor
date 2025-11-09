@@ -1,17 +1,66 @@
 .control-panel {
-  padding: 1rem;
-  background-color: transparent; /* Changed from #f8f9fa */
-  border-radius: 8px;
-  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .control-panel h5 {
   margin-bottom: 1rem;
-  font-weight: 600;
-  color: #e0e0e0; /* Light text for dark bg */
+  color: #f8f9fa;
 }
 
-.control-panel hr {
-  margin: 1rem 0;
-  border-color: #404040; /* Darker grey */
+/* Accordion Dark Theme Styling */
+.accordion-dark {
+  margin-top: 0.5rem;
+}
+
+.accordion-dark .accordion-item {
+  background-color: #212529;
+  border: 1px solid #444;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.accordion-dark .accordion-button {
+  background-color: #343a40;
+  color: #f8f9fa;
+  border: none;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.accordion-dark .accordion-button:not(.collapsed) {
+  background-color: #495057;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.accordion-dark .accordion-button:focus {
+  box-shadow: none;
+  border-color: #444;
+}
+
+.accordion-dark .accordion-button::after {
+  filter: invert(1);
+}
+
+.accordion-dark .accordion-body {
+  background-color: #212529;
+  color: #f8f9fa;
+  padding: 1rem;
+  border-top: 1px solid #444;
+}
+
+/* Remove borders and padding from child components since accordion handles it */
+.accordion-body .tempo-control,
+.accordion-body .effects-control,
+.accordion-body .instrument-controls {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.accordion-body .transport-controls {
+  margin-bottom: 0;
 }

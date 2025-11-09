@@ -1,6 +1,4 @@
 .effects-control {
-    margin-top: 1rem;
-    padding-top: 1rem;
     border-top: 1px solid #444;
   }
   
@@ -14,6 +12,11 @@
     align-items: center;
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
+    color: #f8f9fa;  
+  }
+  
+  .effect-slider-container label strong {
+    color: #ffffff;  
   }
   
   .slider-labels {
@@ -24,6 +27,7 @@
   
   .slider-labels small {
     font-size: 0.7rem;
+    color: #adb5bd;  
   }
   
   /* Ensure consistent styling with tempo control */

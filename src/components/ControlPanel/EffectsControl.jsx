@@ -23,7 +23,7 @@ export default function EffectsControl({ volume, reverb, delay, onVolumeChange, 
           data-bs-toggle="tooltip"
           title="Master volume control - adjusts overall output level"
         >
-          🔊 Volume: <strong>{volume}%</strong>
+          Volume: <strong>{volume}%</strong>
         </label>
         <input 
           type="range" 
