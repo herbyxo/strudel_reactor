@@ -15,24 +15,18 @@ export default function EditorPage() {
     p4: 'on',
     p5: 'on',
   });
-
-  // tempo
   const [tempo, setTempo] = useState(140);
-
-  // effects
-  const [volume, setVolume] = useState(80);   
-  const [reverb, setReverb] = useState(40);   
-  const [delay, setDelay] = useState(20); 
-
-
+  const [volume, setVolume] = useState(80);
+  const [reverb, setReverb] = useState(40);
+  const [delay, setDelay] = useState(20);
   const editorRef = useRef(null);
 
   // Process the initial tune when component mounts
   useEffect(() => {
     console.log('EditorPage mounted, processing initial tune...');
-    const processed = processText(rawText, controls, tempo);
+    const processed = processText(rawText, controls, tempo, volume);
     setProcessedText(processed);
-  }, []); // Run only once on mount
+  }, []);
 
   const handlePreprocessorChange = (newText) => {
     setRawText(newText);
@@ -42,14 +36,15 @@ export default function EditorPage() {
     console.log(`Control changed: ${controlName} = ${value}`);
     setControls(prev => ({ ...prev, [controlName]: value }));
     
+    // If music is playing, reprocess and update
     if (editorRef.current && editorRef.current.repl?.state?.started) {
-      processAndUpdate();
+      process();
     }
   };
 
   const process = () => {
-    console.log('Processing text with tempo:', tempo);
-    const processed = processText(rawText, controls, tempo);
+    console.log('Processing text with tempo:', tempo, 'volume:', volume);
+    const processed = processText(rawText, controls, tempo, volume);
     setProcessedText(processed);
     
     if (editorRef.current) {
@@ -57,30 +52,18 @@ export default function EditorPage() {
     }
   };
 
-  const processAndUpdate = () => {
+  const handlePlay = () => {
+    console.log('Play clicked - processing and playing');
+    // Process first
     process();
-  };
-
-  const processAndPlay = () => {
-    console.log('Process and Play clicked');
-    process();
+    // Then play after a short delay to ensure code is updated
     setTimeout(() => {
       if (editorRef.current) {
-        console.log('Evaluating...');
         editorRef.current.evaluate();
       } else {
         console.error('Editor ref is null!');
       }
     }, 50);
-  };
-
-  const handlePlay = () => {
-    console.log('Play clicked');
-    if (editorRef.current) {
-      editorRef.current.evaluate();
-    } else {
-      console.error('Editor ref is null!');
-    }
   };
 
   const handleStop = () => {
@@ -119,22 +102,20 @@ export default function EditorPage() {
                   <strong className="text-light">Control Panel</strong>
                 </div>
                 <div className="card-body">
-                <ControlPanel 
-                  controls={controls}
-                  onControlChange={handleControlChange}
-                  onPlay={handlePlay}
-                  onStop={handleStop}
-                  onProcess={processAndUpdate}
-                  onProcessAndPlay={processAndPlay}
-                  tempo={tempo}
-                  onTempoChange={setTempo}
-                  volume={volume}           
-                  onVolumeChange={setVolume}   
-                  reverb={reverb}           
-                  onReverbChange={setReverb}   
-                  delay={delay}             
-                  onDelayChange={setDelay}     
-                />
+                  <ControlPanel 
+                    controls={controls}
+                    onControlChange={handleControlChange}
+                    onPlay={handlePlay}
+                    onStop={handleStop}
+                    tempo={tempo}
+                    onTempoChange={setTempo}
+                    volume={volume}
+                    onVolumeChange={setVolume}
+                    reverb={reverb}
+                    onReverbChange={setReverb}
+                    delay={delay}
+                    onDelayChange={setDelay}
+                  />
                 </div>
               </div>
             </div>

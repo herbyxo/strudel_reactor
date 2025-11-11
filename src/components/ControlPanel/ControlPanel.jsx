@@ -9,9 +9,7 @@ export default function ControlPanel({
   controls, 
   onControlChange, 
   onPlay, 
-  onStop, 
-  onProcess, 
-  onProcessAndPlay,
+  onStop,
   tempo,
   onTempoChange,
   volume,
@@ -28,7 +26,7 @@ export default function ControlPanel({
       {/* Bootstrap Accordion */}
       <div className="accordion accordion-dark" id="controlAccordion">
         
-        {/* Transport Controls - OPEN by default */}
+        {/* Transport Controls */}
         <div className="accordion-item bg-dark">
           <h2 className="accordion-header" id="headingTransport">
             <button 
@@ -39,7 +37,7 @@ export default function ControlPanel({
               aria-expanded="true" 
               aria-controls="collapseTransport"
             >
-              Stop/Play
+              Playback
             </button>
           </h2>
           <div 
@@ -52,14 +50,12 @@ export default function ControlPanel({
               <TransportControls
                 onPlay={onPlay}
                 onStop={onStop}
-                onProcess={onProcess}
-                onProcessAndPlay={onProcessAndPlay}
               />
             </div>
           </div>
         </div>
 
-        {/* Tempo Control - CLOSED by default */}
+        {/* Tempo Control */}
         <div className="accordion-item bg-dark">
           <h2 className="accordion-header" id="headingTempo">
             <button 
@@ -88,7 +84,7 @@ export default function ControlPanel({
           </div>
         </div>
 
-        {/* Effects Control - CLOSED by default */}
+        {/* Effects Control */}
         <div className="accordion-item bg-dark">
           <h2 className="accordion-header" id="headingEffects">
             <button 
@@ -121,7 +117,7 @@ export default function ControlPanel({
           </div>
         </div>
 
-        {/* Instrument Controls - CLOSED by default */}
+        {/* Instrument Controls */}
         <div className="accordion-item bg-dark">
           <h2 className="accordion-header" id="headingInstruments">
             <button 
