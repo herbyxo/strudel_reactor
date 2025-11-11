@@ -19,14 +19,25 @@ export default function EditorPage() {
   const [volume, setVolume] = useState(80);
   const [reverb, setReverb] = useState(40);
   const [delay, setDelay] = useState(20);
+  const [isPlaying, setIsPlaying] = useState(false);
   const editorRef = useRef(null);
 
-  // Process the initial tune when component mounts
+  // Single useEffect that watches all dependencies and reprocesses when any change
   useEffect(() => {
-    console.log('EditorPage mounted, processing initial tune...');
+    console.log('Settings changed - reprocessing with tempo:', tempo, 'volume:', volume);
     const processed = processText(rawText, controls, tempo, volume);
     setProcessedText(processed);
-  }, []);
+    
+    if (editorRef.current) {
+      editorRef.current.setCode(processed);
+      
+      // If we're in playing state, evaluate the new code
+      if (isPlaying) {
+        console.log('Playing state active - evaluating with new settings...');
+        editorRef.current.evaluate();
+      }
+    }
+  }, [rawText, controls, tempo, volume, reverb, delay, isPlaying]);
 
   const handlePreprocessorChange = (newText) => {
     setRawText(newText);
@@ -35,39 +46,16 @@ export default function EditorPage() {
   const handleControlChange = (controlName, value) => {
     console.log(`Control changed: ${controlName} = ${value}`);
     setControls(prev => ({ ...prev, [controlName]: value }));
-    
-    // If music is playing, reprocess and update
-    if (editorRef.current && editorRef.current.repl?.state?.started) {
-      process();
-    }
-  };
-
-  const process = () => {
-    console.log('Processing text with tempo:', tempo, 'volume:', volume);
-    const processed = processText(rawText, controls, tempo, volume);
-    setProcessedText(processed);
-    
-    if (editorRef.current) {
-      editorRef.current.setCode(processed);
-    }
   };
 
   const handlePlay = () => {
-    console.log('Play clicked - processing and playing');
-    // Process first
-    process();
-    // Then play after a short delay to ensure code is updated
-    setTimeout(() => {
-      if (editorRef.current) {
-        editorRef.current.evaluate();
-      } else {
-        console.error('Editor ref is null!');
-      }
-    }, 50);
+    console.log('Play clicked');
+    setIsPlaying(true);
   };
 
   const handleStop = () => {
     console.log('Stop clicked');
+    setIsPlaying(false);
     if (editorRef.current) {
       editorRef.current.stop();
     } else {

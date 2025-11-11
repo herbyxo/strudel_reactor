@@ -6,9 +6,37 @@
   return text.replaceAll(tag, replacement);
 }
 
-export function processText(text, controls, tempo = 140) {
-  let processed = text;
+export function adjustGainValues(text, volume) {
+  // Map slider 0–100 to a 0–1 factor
+  const volumeFactor = volume / 100;
+
+  let output = text;
+
   
+  output = output.replace(/(?<!post)gain\(([\d.]+)\)/g, (match, baseGain) => {
+    const base = parseFloat(baseGain);
+    if (isNaN(base)) return match;
+    const newGain = base * volumeFactor;
+    return `gain(${newGain.toFixed(3)})`;
+  });
+
+  
+  output = output.replace(/postgain\(([\d.]+)\)/g, (match, baseGain) => {
+    const base = parseFloat(baseGain);
+    if (isNaN(base)) return match;
+    const newGain = base * volumeFactor;
+    return `postgain(${newGain.toFixed(3)})`;
+  });
+
+  return output;
+}
+
+
+      export function processText(text, controls, tempo = 140, volume = 80) {
+        
+        let processed = text;
+  
+
   // Process tempo tag
   processed = replaceTag(processed, '<tempo>', tempo.toString());
   
@@ -31,6 +59,8 @@ export function processText(text, controls, tempo = 140) {
       processed = replaceTag(processed, control.tag, '');
     }
   });
+
+  processed = adjustGainValues(processed, volume);
   
   return processed;
 }
