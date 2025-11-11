@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './css/EffectsControl.css';
 
-export default function EffectsControl({ volume, reverb, delay, onVolumeChange, onReverbChange, onDelayChange }) {
+export default function EffectsControl({ volume, reverb, onVolumeChange, onReverbChange }) {
   
   // Initialize tooltips
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function EffectsControl({ volume, reverb, delay, onVolumeChange, 
           htmlFor="volumeRange" 
           className="form-label"
           data-bs-toggle="tooltip"
-          title="Master volume control - adjusts overall output level"
+          title="Volume control - exceptions: Arpeggio, Bassline"
         >
           Volume: <strong>{volume}%</strong>
         </label>
@@ -65,32 +65,6 @@ export default function EffectsControl({ volume, reverb, delay, onVolumeChange, 
         <div className="slider-labels">
           <small className="text-muted">Dry</small>
           <small className="text-muted">Wet</small>
-        </div>
-      </div>
-
-      {/* Delay/Echo */}
-      <div className="effect-slider-container">
-        <label 
-          htmlFor="delayRange" 
-          className="form-label"
-          data-bs-toggle="tooltip"
-          title="Delay/echo effect - creates repeating echoes"
-        >
-          Delay: <strong>{delay}%</strong>
-        </label>
-        <input 
-          type="range" 
-          className="form-range" 
-          id="delayRange"
-          min="0" 
-          max="100" 
-          step="5"
-          value={delay}
-          onChange={(e) => onDelayChange(Number(e.target.value))}
-        />
-        <div className="slider-labels">
-          <small className="text-muted">None</small>
-          <small className="text-muted">Echo</small>
         </div>
       </div>
     </div>

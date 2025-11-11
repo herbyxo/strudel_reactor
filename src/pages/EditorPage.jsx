@@ -18,14 +18,14 @@ export default function EditorPage() {
   const [tempo, setTempo] = useState(140);
   const [volume, setVolume] = useState(80);
   const [reverb, setReverb] = useState(40);
-  const [delay, setDelay] = useState(20);
+  
   const [isPlaying, setIsPlaying] = useState(false);
   const editorRef = useRef(null);
 
   // Single useEffect that watches all dependencies and reprocesses when any change
   useEffect(() => {
     console.log('Settings changed - reprocessing with tempo:', tempo, 'volume:', volume);
-    const processed = processText(rawText, controls, tempo, volume);
+    const processed = processText(rawText, controls, tempo, volume, reverb);
     setProcessedText(processed);
     
     if (editorRef.current) {
@@ -37,7 +37,7 @@ export default function EditorPage() {
         editorRef.current.evaluate();
       }
     }
-  }, [rawText, controls, tempo, volume, reverb, delay, isPlaying]);
+  }, [rawText, controls, tempo, volume, reverb, isPlaying]);
 
   const handlePreprocessorChange = (newText) => {
     setRawText(newText);
@@ -101,8 +101,6 @@ export default function EditorPage() {
                     onVolumeChange={setVolume}
                     reverb={reverb}
                     onReverbChange={setReverb}
-                    delay={delay}
-                    onDelayChange={setDelay}
                   />
                 </div>
               </div>

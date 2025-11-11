@@ -15,9 +15,7 @@ export default function ControlPanel({
   volume,
   onVolumeChange,
   reverb,
-  onReverbChange,
-  delay,
-  onDelayChange
+  onReverbChange
 }) {
   return (
     <div className="control-panel">
@@ -110,8 +108,6 @@ export default function ControlPanel({
                 onVolumeChange={onVolumeChange}
                 reverb={reverb}
                 onReverbChange={onReverbChange}
-                delay={delay}
-                onDelayChange={onDelayChange}
               />
             </div>
           </div>

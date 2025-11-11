@@ -6,6 +6,22 @@
   return text.replaceAll(tag, replacement);
 }
 
+export function adjustReverbValues(text, reverb) {
+  // Map slider 0–100 to a factor.
+  // Here: 50% ≈ original, <50 = drier, >50 = wetter.
+  const reverbFactor = reverb / 50; // tweak if you like
+
+  // This will catch:
+  // - room(0.6)
+  // - room(0.3)
+  // - room(sine.range(0.1,0.4))
+  // and wrap the inner expression in (* factor)
+  return text.replace(/room\(([^)]+)\)/g, (match, inner) => {
+    return `room((${inner})*${reverbFactor.toFixed(3)})`;
+  });
+}
+
+
 export function adjustGainValues(text, volume) {
   // Map slider 0–100 to a 0–1 factor
   const volumeFactor = volume / 100;
@@ -32,7 +48,7 @@ export function adjustGainValues(text, volume) {
 }
 
 
-      export function processText(text, controls, tempo = 140, volume = 80) {
+      export function processText(text, controls, tempo = 140, volume = 80, reverb = 40) {
         
         let processed = text;
   
@@ -49,6 +65,7 @@ export function adjustGainValues(text, volume) {
     { name: 'p5', tag: '<p5_Radio>', label: 'Hi-Hats (Closed)' },
   ];
   
+  // Comments for what is muted
   controlInfo.forEach(control => {
     if (controls[control.name] === 'hush') {
       // Replace tag with underscore and add comment
@@ -61,6 +78,8 @@ export function adjustGainValues(text, volume) {
   });
 
   processed = adjustGainValues(processed, volume);
+
+  processed = adjustReverbValues(processed, reverb);
   
   return processed;
 }
