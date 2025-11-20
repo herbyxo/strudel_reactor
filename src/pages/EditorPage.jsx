@@ -6,7 +6,7 @@ import { useTune } from '../context/TuneContext';
 import { processText } from '../utils/preprocessor';
 
 export default function EditorPage() {
-  const { rawText, setRawText } = useTune();
+  const { rawText, setRawText, setAudioData } = useTune();
   const [processedText, setProcessedText] = useState('');
   const [controls, setControls] = useState({
     p1: 'on',
@@ -56,6 +56,14 @@ export default function EditorPage() {
   const handleStop = () => {
     console.log('Stop clicked');
     setIsPlaying(false);
+    
+    // Reset audio data
+    setAudioData({
+      currentHaps: [],
+      currentTime: 0,
+      isPlaying: false
+    });
+    
     if (editorRef.current) {
       editorRef.current.stop();
     } else {

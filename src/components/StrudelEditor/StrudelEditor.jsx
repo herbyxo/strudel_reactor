@@ -6,12 +6,14 @@ import { initAudioOnFirstClick } from '@strudel/webaudio';
 import { transpiler } from '@strudel/transpiler';
 import { getAudioContext, webaudioOutput, registerSynthSounds } from '@strudel/webaudio';
 import { registerSoundfonts } from '@strudel/soundfonts';
+import { useTune } from '../../context/TuneContext';
 import './StrudelEditor.css';
 
 export default function StrudelEditor({ editorRef, processedCode }) {
   const canvasRef = useRef(null);
   const editorRootRef = useRef(null);
   const isInitialized = useRef(false);
+  const { setAudioData } = useTune();
 
   useEffect(() => {
     // Only initialize once, and only if not already initialized
@@ -42,8 +44,17 @@ export default function StrudelEditor({ editorRef, processedCode }) {
       transpiler,
       root: editorRoot,
       drawTime,
-      onDraw: (haps, time) => 
-        drawPianoroll({ haps, time, ctx: drawContext, drawTime, fold: 0 }),
+      onDraw: (haps, time) => {
+        // Draw to local canvas
+        drawPianoroll({ haps, time, ctx: drawContext, drawTime, fold: 0 });
+        
+        // Share audio data with context for visualizer
+        setAudioData({
+          currentHaps: haps,
+          currentTime: time,
+          isPlaying: true
+        });
+      },
       prebake: async () => {
         initAudioOnFirstClick();
         const loadModules = evalScope(
