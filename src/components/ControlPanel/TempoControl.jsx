@@ -11,38 +11,58 @@ export default function TempoControl({ tempo, onTempoChange }) {
     });
   }, []);
 
+  const handleTempoChange = (e) => {
+    const value = Number(e.target.value);
+    // Ensure value is within valid range
+    if (value >= 60 && value <= 200) {
+      onTempoChange(value);
+    } else if (e.target.value === '') {
+      // Allow empty input while typing
+      return;
+    }
+  };
+
+  const handleBlur = (e) => {
+    const value = Number(e.target.value);
+    // Clamp value to valid range on blur
+    if (value < 60) {
+      onTempoChange(60);
+    } else if (value > 200) {
+      onTempoChange(200);
+    } else if (isNaN(value) || e.target.value === '') {
+      onTempoChange(140); // Default value
+    }
+  };
+
   return (
     <div className="tempo-control">
       <h6 className="section-title">Tempo Control</h6>
       
-      <div className="tempo-slider-container">
+      <div className="tempo-input-container">
         <label 
-          htmlFor="tempoRange" 
+          htmlFor="tempoInput" 
           className="form-label"
-          data-bs-toggle="tooltip"
-          title="Adjust the tempo (speed) of the music in beats per minute"
         >
-          BPM: <strong>{tempo}</strong>
+          BPM:
         </label>
         
         <input 
-          type="range" 
-          className="form-range" 
-          id="tempoRange"
+          type="number" 
+          className="form-control" 
+          id="tempoInput"
           min="60" 
           max="200" 
-          step="5"
+          step="1"
           value={tempo}
-          onChange={(e) => onTempoChange(Number(e.target.value))}
+          onChange={handleTempoChange}
+          onBlur={handleBlur}
+          data-bs-toggle="tooltip"
+          title="Hold arrows to quickly change tempo"
         />
         
-        <div className="tempo-labels">
-          <small className="text-muted">60</small>
-          <small className="text-muted">Slow</small>
-          <small className="text-muted">Normal</small>
-          <small className="text-muted">Fast</small>
-          <small className="text-muted">200</small>
-        </div>
+        <small className="text-muted d-block mt-2">
+          Range: 60-200 BPM
+        </small>
       </div>
     </div>
   );
