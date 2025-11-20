@@ -18,6 +18,7 @@ export default function StrudelEditor({ editorRef, processedCode }) {
   useEffect(() => {
     // Only initialize once, and only if not already initialized
     if (isInitialized.current || editorRef.current) {
+      console.log('Editor already initialized, skipping...');
       return;
     }
 
@@ -71,7 +72,7 @@ export default function StrudelEditor({ editorRef, processedCode }) {
     isInitialized.current = true;
     console.log('Strudel editor initialized successfully');
 
-  }, []); // Empty dependency array - only run once on mount
+  }, [editorRef, setAudioData]); // Added editorRef to dependencies
 
   // Update editor code when processedCode changes
   useEffect(() => {

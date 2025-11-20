@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useRef } from 'react';
 import { stranger_tune } from '../tunes';
 
 const TuneContext = createContext();
@@ -17,12 +17,21 @@ export function TuneProvider({ children }) {
     isPlaying: false
   });
 
+  // Add isPlaying state to context
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  // Store editor ref in context so it persists across navigation
+  const editorRef = useRef(null);
+
   return (
     <TuneContext.Provider value={{ 
       rawText, 
       setRawText,
       audioData,
-      setAudioData
+      setAudioData,
+      isPlaying,
+      setIsPlaying,
+      editorRef
     }}>
       {children}
     </TuneContext.Provider>

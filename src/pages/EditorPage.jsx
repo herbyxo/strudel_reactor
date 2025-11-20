@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PreprocessorEditor from '../components/PreprocessorEditor/PreprocessorEditor';
 import StrudelEditor from '../components/StrudelEditor/StrudelEditor';
 import ControlPanel from '../components/ControlPanel/ControlPanel';
@@ -6,7 +6,7 @@ import { useTune } from '../context/TuneContext';
 import { processText } from '../utils/preprocessor';
 
 export default function EditorPage() {
-  const { rawText, setRawText, setAudioData } = useTune();
+  const { rawText, setRawText, setAudioData, isPlaying, setIsPlaying, editorRef } = useTune();
   const [processedText, setProcessedText] = useState('');
   const [controls, setControls] = useState({
     p1: 'on',
@@ -18,9 +18,6 @@ export default function EditorPage() {
   const [tempo, setTempo] = useState(140);
   const [volume, setVolume] = useState(80);
   const [reverb, setReverb] = useState(40);
-  
-  const [isPlaying, setIsPlaying] = useState(false);
-  const editorRef = useRef(null);
 
   // Single useEffect that watches all dependencies and reprocesses when any change
   useEffect(() => {
@@ -31,13 +28,13 @@ export default function EditorPage() {
     if (editorRef.current) {
       editorRef.current.setCode(processed);
       
-      // If we're in playing state, evaluate the new code
+      // If in playing state, evaluate the new code
       if (isPlaying) {
         console.log('Playing state active - evaluating with new settings...');
         editorRef.current.evaluate();
       }
     }
-  }, [rawText, controls, tempo, volume, reverb, isPlaying]);
+  }, [rawText, controls, tempo, volume, reverb, isPlaying, editorRef]);
 
   const handlePreprocessorChange = (newText) => {
     setRawText(newText);
@@ -50,7 +47,10 @@ export default function EditorPage() {
 
   const handlePlay = () => {
     console.log('Play clicked');
-    setIsPlaying(true);
+    if (editorRef.current) {
+      editorRef.current.evaluate();
+      setIsPlaying(true);
+    }
   };
 
   const handleStop = () => {
