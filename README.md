@@ -192,7 +192,7 @@ This is an original arrangement created for this project, not copied from the St
 
 ## Demonstration Video
 
-**Video Link**: ---
+**Video Link**: https://youtu.be/l7CmjSfUT6o
 
 The demonstration video includes:
 - Full walkthrough of all features
